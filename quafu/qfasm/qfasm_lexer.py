@@ -78,6 +78,7 @@ class QfasmLexer(object):
         "STRING",
         "ASSIGN",
         "MATCHES",
+        "EQUAL",
         "ID",
         "UNIT",
         "CHANNEL",
@@ -126,7 +127,7 @@ class QfasmLexer(object):
         return self.lexer.token()
 
     def t_FLOAT(self, t):
-        r"(([1-9]\d*\.\d*)|(0\.\d*[1-9]\d*))"
+        r"([0-9]\d*\.\d*)"
         t.value = float(t.value)
         return t
 
@@ -145,6 +146,10 @@ class QfasmLexer(object):
 
     def t_MATCHES(self, t):
         r"=="
+        return t
+
+    def t_EQUAL(self, t):
+        r"="
         return t
 
     def t_UNIT(self, t):
